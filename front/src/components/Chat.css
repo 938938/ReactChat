@@ -1,0 +1,128 @@
+.RoomContainer {
+  width: 300px;
+  height: 440px;
+}
+
+.RoomContainer p {
+  margin: 0;
+}
+.RoomHeader {
+  height: 40px;
+  border-radius: 6px 6px 0 0;
+  background: #355463;
+  position: relative;
+}
+.RoomHeader p {
+  display: block;
+  padding: 0 1em 0 2em;
+  color: #fff;
+  font-weight: 700;
+  line-height: 45px;
+}
+
+.RoomBody {
+  height:360px;
+  border: 1px solid #355463;
+  background: #fff;
+  position: relative;
+}
+.MessageBox {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.MessageBox::-webkit-scrollbar {
+  display: none;
+}
+
+.Message {
+  padding: 10px;
+  display: flex;
+}
+.MessageBody {
+  min-height: 40px;
+  max-width: 120px;
+  background-color: #598da7;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin:0 3px;
+  padding:2px 10px;
+  overflow-wrap: break-word;
+  word-break:keep-all;
+}
+#me {
+  justify-content: flex-end;
+}
+
+#me .MessageBody {
+  justify-content: flex-end;
+}
+
+#me .MessageSub {
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+
+#other {
+  justify-content: flex-start;
+}
+
+#other .MessageBody {
+  justify-content: flex-start;
+  background-color: #2d617b;
+}
+
+#other .MessageSub {
+  justify-content: flex-start;
+  margin-left: 10px;
+}
+
+.MessageSub #author {
+  margin-left: 5px;
+  font-weight: bold;
+}
+
+.MessageSub {
+  display: flex;
+  font-size: 12px;
+}
+
+.ChatInput {
+  height: 40px;
+  border: 1px solid #355463;
+  border-top: none;
+  display: flex;
+  border-radius:0 0 6px 6px;
+}
+
+.ChatInput input {
+  height: 100%;
+  flex: 85%;
+  border: 0;
+  padding: 0 0.7em;
+  font-size: 1em;
+  border-right: 1px dotted #355463;
+  outline: none;
+  font-family: "Open Sans", sans-serif;
+  background: transparent;
+}
+
+.ChatInput button {
+  border: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: 15%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  font-size: 25px;
+  color: lightgray;
+}
+
+.ChatInput button:hover {
+  color: steelblue;
+}
