@@ -52,7 +52,6 @@ const ChatApp = styled.div`
   height: 100vh;
   background: #fff;
   color: #212121;
-  font-family: "Open Sans", sans-serif;
   display: grid;
   place-items: center;
 `
@@ -64,6 +63,7 @@ const ChatContainer = styled.div`
   border:1px solid steelblue;
   border-radius:6px;
   padding:10px;
+  width:250px;
 `
 const ChatTitle = styled.h3`
   font-size: 2rem;

@@ -1,50 +1,53 @@
-import './Chat.css';
-import React, { useEffect, useState } from 'react';
-import ScrollToBottom from 'react-scroll-to-bottom';
-import { Message } from './Message';
+import "./Chat.css";
+import React, { useEffect, useState } from "react";
+import ScrollToBottom from "react-scroll-to-bottom";
+import { Message } from "./Message";
+import styled from "styled-components";
 
 function Chat({ socket, username, room }) {
-  const [currentMessage, setCurrentMessage] = useState('');
+  const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
 
   const sendMessage = async () => {
-    if (currentMessage !== '') {
+    if (currentMessage !== "") {
       const messageData = {
         room: room,
         author: username,
         message: currentMessage,
         time:
           new Date(Date.now()).getHours() +
-          ':' +
+          ":" +
           new Date(Date.now()).getMinutes(),
       };
 
-      await socket.emit('send_message', messageData);
+      await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
-      setCurrentMessage('');
+      setCurrentMessage("");
     }
   };
 
   useEffect(() => {
-    socket.on('receive_message', (data) => {
+    socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
 
   return (
-    <div className='RoomContainer'>
-      <div className='RoomHeader'>
-        <p>{room}번 채팅방</p>
-      </div>
-      <div className='RoomBody'>
+    <RoomContainer>
+      <RoomHeader>
+        <RoomTitle>{room}번 채팅방</RoomTitle>
+      </RoomHeader>
+      <RoomBody>
         <ScrollToBottom className='MessageBox'>
           {messageList.map((messageContent) => {
-            return <Message messageContent={messageContent} username={username} />;
+            return (
+              <Message messageContent={messageContent} username={username} />
+            );
           })}
         </ScrollToBottom>
-      </div>
-      <div className='ChatInput'>
-        <input
+      </RoomBody>
+      <ChatInputBox>
+        <ChatInput
           type='text'
           value={currentMessage}
           placeholder='메세지를 입력해주세요'
@@ -52,13 +55,83 @@ function Chat({ socket, username, room }) {
             setCurrentMessage(event.target.value);
           }}
           onKeyPress={(event) => {
-            event.key === 'Enter' && sendMessage();
+            event.key === "Enter" && sendMessage();
           }}
         />
-        <button onClick={sendMessage}>&#9658;</button>
-      </div>
-    </div>
+        <ChatButton onClick={sendMessage}>&#9658;</ChatButton>
+      </ChatInputBox>
+    </RoomContainer>
   );
 }
 
 export default Chat;
+
+const RoomContainer = styled.div`
+  width: 300px;
+  height: 440px;
+`;
+
+const RoomHeader = styled.div`
+  height: 40px;
+  border-radius: 6px 6px 0 0;
+  background: #355463;
+  position: relative;
+`;
+
+const RoomTitle = styled.p`
+  margin: 0;
+  display: block;
+  padding: 0 1em 0 2em;
+  color: #fff;
+  font-weight: 700;
+  line-height: 45px;
+`;
+
+const RoomBody = styled.div`
+  height: 360px;
+  border: 1px solid #355463;
+  background: #fff;
+  position: relative;
+`;
+
+// const MessageBox = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   overflow-y: scroll;
+//   overflow-x: hidden;
+// `;
+
+const ChatInputBox = styled.div`
+  height: 40px;
+  border: 1px solid #355463;
+  border-top: none;
+  display: flex;
+  border-radius: 0 0 6px 6px;
+`;
+
+const ChatInput = styled.input`
+  height: 100%;
+  flex: 85%;
+  border: 0;
+  padding: 0 0.7em;
+  font-size: 1em;
+  border-right: 1px dotted #355463;
+  outline: none;
+  background: transparent;
+`;
+
+const ChatButton = styled.button`
+  border: 0;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  flex: 15%;
+  height: 100%;
+  background: transparent;
+  outline: none;
+  font-size: 25px;
+  color: lightgray;
+  &:hover{  
+    background:steelblue;
+  }
+`;

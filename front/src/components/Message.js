@@ -1,20 +1,64 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 
 export const Message = (props) => {
   const messageContent = props.messageContent;
   const username = props.username;
-  
+  const [who, setWho] = useState("me");
+  useEffect(() => {
+    username === messageContent.author ? setWho("me") : setWho("other");
+  });
+  console.log(who);
+
   return (
-    <div className='Message' id={username === messageContent.author ? 'me' : 'other'}>
+    <MessageContainer who={who}>
       <div>
-        <div className='MessageBody'>
+        <MessageBody who={who}>
           <p>{messageContent.message}</p>
-        </div>
-        <div className='MessageSub'>
-          <p id='time'>{messageContent.time}</p>
-          <p id='author'>{messageContent.author}</p>
-        </div>
+        </MessageBody>
+        <MessageSub who={who}>
+          <Time>{messageContent.time}</Time>
+          <Author>{messageContent.author}</Author>
+        </MessageSub>
       </div>
-    </div>
+    </MessageContainer>
   );
 };
+
+const MessageContainer = styled.div`
+  padding: 10px;
+  display: flex;
+  justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
+`;
+
+const MessageBody = styled.div`
+  min-height: 40px;
+  max-width: 120px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  margin: 0 3px;
+  padding: 2px 10px;
+  overflow-wrap: break-word;
+  word-break: keep-all;
+  justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
+  background-color: ${({ who }) => (who === "me" ? "#598da7" : "#2d617b")};
+`;
+
+const MessageSub = styled.div`
+  display: flex;
+  font-size: 12px;
+  justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
+  margin-right: ${({ who }) => (who === "me" ? "10px" : "")};
+  margin-left: ${({ who }) => (who === "me" ? "" : "10px")};
+`;
+
+const Time = styled.p`
+  padding-right: 5px;
+`;
+
+const Author = styled.p`
+  margin-left: 5px;
+  font-weight: bold;
+`;
