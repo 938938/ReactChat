@@ -26,7 +26,6 @@ export const Message = (props) => {
 };
 
 const MessageContainer = styled.div`
-  padding: 10px;
   display: flex;
   justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
 `;
@@ -55,10 +54,12 @@ const MessageSub = styled.div`
 `;
 
 const Time = styled.p`
-  padding-right: 5px;
+  margin-top: 5px;
+  margin-right:5px;
 `;
 
 const Author = styled.p`
+  margin-top: 5px;
   margin-left: 5px;
   font-weight: bold;
 `;

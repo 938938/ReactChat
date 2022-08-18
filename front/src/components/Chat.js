@@ -1,12 +1,13 @@
-import "./Chat.css";
-import React, { useEffect, useState } from "react";
-import ScrollToBottom from "react-scroll-to-bottom";
+import React, { useEffect, useRef, useState } from "react";
+// import ScrollToBottom from "react-scroll-to-bottom";
 import { Message } from "./Message";
 import styled from "styled-components";
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+
+  const messageBottomRef = useRef(null);
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -32,19 +33,26 @@ function Chat({ socket, username, room }) {
     });
   }, [socket]);
 
+  useEffect(() => {
+    messageBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messageList]);
+
   return (
     <RoomContainer>
       <RoomHeader>
         <RoomTitle>{room}번 채팅방</RoomTitle>
       </RoomHeader>
       <RoomBody>
-        <ScrollToBottom className='MessageBox'>
+        {/* <ScrollToBottom className='MessageBox'> */}
+        <MessageBox>
           {messageList.map((messageContent) => {
             return (
               <Message messageContent={messageContent} username={username} />
             );
           })}
-        </ScrollToBottom>
+          <div ref={messageBottomRef} />
+        </MessageBox>
+        {/* </ScrollToBottom> */}
       </RoomBody>
       <ChatInputBox>
         <ChatInput
@@ -94,12 +102,15 @@ const RoomBody = styled.div`
   position: relative;
 `;
 
-// const MessageBox = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   overflow-y: scroll;
-//   overflow-x: hidden;
-// `;
+const MessageBox = styled.div`
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &:-webkit-scrollbar {
+    display: none;
+  }
+`;
 
 const ChatInputBox = styled.div`
   height: 40px;
@@ -131,7 +142,7 @@ const ChatButton = styled.button`
   outline: none;
   font-size: 25px;
   color: lightgray;
-  &:hover{  
-    background:steelblue;
+  &:hover {
+    background: steelblue;
   }
 `;
