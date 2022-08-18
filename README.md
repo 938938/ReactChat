@@ -22,7 +22,7 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
 - ver1.0.0 <br>
   기본적인 채팅 기능이 구현 되어있습니다. 처음 입장시 입력한 채팅방을 통해 대화를 주고받을 수 있습니다.
 - ver1.0.1 <br>
-  CSS 변경, styled-components 적용 중 ~~(App.js, Message.js 완료 - Chat.js 라이브러리 적용 문제)~~ - 완료
+  CSS 변경, styled-components 적용 ~~(App.js, Message.js 완료 - Chat.js 라이브러리 적용 문제)~~ - 완료
 
 ## 앞으로 업데이트 할 내용(예정, 순서 무관)
 
