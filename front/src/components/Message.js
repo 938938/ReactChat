@@ -14,7 +14,7 @@ export const Message = (props) => {
     <MessageContainer who={who}>
       <div>
         <MessageBody who={who}>
-          <p>{messageContent.message}</p>
+          <MessageText>{messageContent.message}</MessageText>
         </MessageBody>
         <MessageSub who={who}>
           <Time>{messageContent.time}</Time>
@@ -32,18 +32,22 @@ const MessageContainer = styled.div`
 
 const MessageBody = styled.div`
   min-height: 40px;
-  max-width: 120px;
+  max-width: 180px;
   border-radius: 5px;
   color: white;
   display: flex;
   align-items: center;
   margin: 0 3px;
-  padding: 2px 10px;
+  padding: 2px 5px;
   overflow-wrap: break-word;
-  word-break: keep-all;
+  word-break:break-all;
   justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
   background-color: ${({ who }) => (who === "me" ? "#598da7" : "#2d617b")};
 `;
+
+const MessageText = styled.p`
+  margin:5px;
+`
 
 const MessageSub = styled.div`
   display: flex;

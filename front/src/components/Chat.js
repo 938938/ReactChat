@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 // import ScrollToBottom from "react-scroll-to-bottom";
 import { Message } from "./Message";
 import styled from "styled-components";
+import { v4 as uuidv4 } from 'uuid';
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -20,7 +21,6 @@ function Chat({ socket, username, room }) {
           ":" +
           new Date(Date.now()).getMinutes(),
       };
-
       await socket.emit("send_message", messageData);
       setMessageList((list) => [...list, messageData]);
       setCurrentMessage("");
@@ -47,7 +47,7 @@ function Chat({ socket, username, room }) {
         <MessageBox>
           {messageList.map((messageContent) => {
             return (
-              <Message messageContent={messageContent} username={username} />
+              <Message messageContent={messageContent} username={username} key={uuidv4()} />
             );
           })}
           <div ref={messageBottomRef} />
