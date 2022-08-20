@@ -1,8 +1,7 @@
 # Chat ! - React.ver
 
 ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채팅웹입니다.<br>
-현재 가장 기본적으로 실시간 채팅이 가능한 상태이며, 처음 입장시 채팅방을 설정할 수 있어 같은 채팅방에 들어간 이들끼리만 대화를 나눌 수가 있습니다.
-
+현재 가장 기본적으로 실시간 채팅이 가능한 상태이며, 처음 입장시 채팅방을 설정할 수 있어 같은 채팅방에 들어간 이들끼리 대화를 나눌 수가 있습니다.
 [유튜브 강의](https://www.youtube.com/watch?v=NU-HfZY3ATQ&t=3106s)와 다양한 글을 참고로 하여 기틀을 만들었으며, 앞으로 기능을 확장해나갈 예정입니다.
 <br>
 
@@ -16,6 +15,12 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
 
 ---
 <br>
+
+## 사용 방법
+1. front와 server 폴더를 모두 받아주세요.
+2. server 위치에서 npm i 혹은 npm install 을 통해 node modules를 다운받은 후 npm start를 실행해주세요.
+3. front 위치에서 npm i 혹은 npm install 을 통해 node modules를 다운받은 후 npm start를 실행해주세요.
+4. 대화를 나눠주세요!
 
 ## 업데이트 기록
 
