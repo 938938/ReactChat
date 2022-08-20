@@ -26,6 +26,9 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
 - ver1.0.2 <br>
   UUID 를 통한 메세지의 key값 할당 옵션 추가
   CSS 변경(MessageText)
+- ver1.0.3 <br>
+  메세지가 두 번 받아와지는 오류 해결
+  (index.js에 있는 React.strictmode가 구성 요소를 두 번 매핑함으로 인해 생겨난 문제, 해당 태그를 삭제.)
 
 ## 앞으로 업데이트 할 내용(예정, 순서 무관)
 

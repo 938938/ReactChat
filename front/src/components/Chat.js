@@ -27,10 +27,17 @@ function Chat({ socket, username, room }) {
     }
   };
 
+  console.log(socket);
+
+  // useEffect(()=>{
+  //   socket.close();
+  // },[])
+
   useEffect(() => {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
+    console.log('hello?')
   }, [socket]);
 
   useEffect(() => {
@@ -110,6 +117,7 @@ const MessageBox = styled.div`
   &:-webkit-scrollbar {
     display: none;
   }
+  padding-top:5px;
 `;
 
 const ChatInputBox = styled.div`
