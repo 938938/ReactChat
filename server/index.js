@@ -20,9 +20,10 @@ io.on("connection", (socket) => {
   console.log(`${socket.id} 유저가 접속했습니다`);
 
   socket.on("join_room", (data) => {
-    socket.join(data);
+    socket.join(data.room);
     console.log(`${data.username}유저가 ${data.room}번 방에 입장했습니다`);
-    socket.emit('member', data.username);
+
+    socket.to(data.room).emit('member', data.username);
   });
 
   socket.on("send_message", (data) => {

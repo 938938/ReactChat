@@ -3,11 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Message } from "./Message";
 import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
-import { User } from './User';
+import { Member } from './Member';
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [member, setMember] = useState([]);
 
   const messageBottomRef = useRef(null);
 
@@ -38,11 +39,12 @@ function Chat({ socket, username, room }) {
     socket.on("receive_message", (data) => {
       setMessageList((list) => [...list, data]);
     });
-    console.log('hello?')
-    socket.on('member', (data)=>{
-      console.log(data)
-    })
   }, [socket]);
+
+  socket.on('member', (data)=>{
+    console.log(data)
+    setMember((member)=>[...member, data]);
+  })
 
   useEffect(() => {
     messageBottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -53,9 +55,9 @@ function Chat({ socket, username, room }) {
       <RoomHeader>
         <RoomTitle>{room}번 채팅방</RoomTitle>
       </RoomHeader>
+      {/* <Member member={member} /> */}
       <RoomBody>
         {/* <ScrollToBottom className='MessageBox'> */}
-        <User />
         <MessageBox>
           {messageList.map((messageContent) => {
             return (
