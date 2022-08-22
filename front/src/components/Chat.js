@@ -3,6 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { Message } from "./Message";
 import styled from "styled-components";
 import { v4 as uuidv4 } from 'uuid';
+import { User } from './User';
 
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
@@ -38,6 +39,9 @@ function Chat({ socket, username, room }) {
       setMessageList((list) => [...list, data]);
     });
     console.log('hello?')
+    socket.on('member', (data)=>{
+      console.log(data)
+    })
   }, [socket]);
 
   useEffect(() => {
@@ -51,6 +55,7 @@ function Chat({ socket, username, room }) {
       </RoomHeader>
       <RoomBody>
         {/* <ScrollToBottom className='MessageBox'> */}
+        <User />
         <MessageBox>
           {messageList.map((messageContent) => {
             return (

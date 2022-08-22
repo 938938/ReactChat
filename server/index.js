@@ -21,7 +21,8 @@ io.on("connection", (socket) => {
 
   socket.on("join_room", (data) => {
     socket.join(data);
-    console.log(`${socket.id}유저가 ${data}번 방에 입장했습니다`);
+    console.log(`${data.username}유저가 ${data.room}번 방에 입장했습니다`);
+    socket.emit('member', data.username);
   });
 
   socket.on("send_message", (data) => {
