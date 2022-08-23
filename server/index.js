@@ -7,7 +7,7 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const port = 4050;
+const port = 4000;
 
 const io = new Server(server, {
   cors: {
@@ -17,13 +17,14 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
+  let member = [];
   console.log(`${socket.id} 유저가 접속했습니다`);
 
   socket.on("join_room", (data) => {
+    let nickname = data.username;
     socket.join(data.room);
     console.log(`${data.username}유저가 ${data.room}번 방에 입장했습니다`);
-
-    socket.to(data.room).emit('member', data.username);
+    // socket.to(data.room).emit('receive_message', nickname);
   });
 
   socket.on("send_message", (data) => {

@@ -9,6 +9,7 @@ function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
   const [member, setMember] = useState([]);
+  const [login, setLogin] = useState(false);
 
   const messageBottomRef = useRef(null);
 
@@ -41,9 +42,11 @@ function Chat({ socket, username, room }) {
     });
   }, [socket]);
 
-  socket.on('member', (data)=>{
-    console.log(data)
-    setMember((member)=>[...member, data]);
+  useEffect(()=>{
+    socket.on('member', (data)=>{
+      console.log(data)
+      setMember((member)=>[...member, data]);
+    })
   })
 
   useEffect(() => {
