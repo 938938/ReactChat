@@ -92,7 +92,7 @@ function Chat({ socket, username, room }) {
 export default Chat;
 
 const RoomContainer = styled.div`
-  width: 60%;
+  width: 50%;
   @media screen and (max-width: 500px) {
         width:90%;
     }
