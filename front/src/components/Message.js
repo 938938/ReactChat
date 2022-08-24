@@ -31,7 +31,7 @@ const MessageContainer = styled.div`
 
 const MessageBody = styled.div`
   min-height: 40px;
-  max-width: 180px;
+  max-width: 550px;
   border-radius: 5px;
   color: white;
   display: flex;
