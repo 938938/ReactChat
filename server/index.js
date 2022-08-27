@@ -17,14 +17,15 @@ const io = new Server(server, {
 });
 
 io.on("connection", (socket) => {
-  let member = [];
+
   console.log(`${socket.id} 유저가 접속했습니다`);
 
   socket.on("join_room", (data) => {
+    let member = [];
     let nickname = data.username;
     socket.join(data.room);
     console.log(`${data.username}유저가 ${data.room}번 방에 입장했습니다`);
-    // socket.to(data.room).emit('receive_message', nickname);
+    socket.to(data.room).emit('member', member);
   });
 
   socket.on("send_message", (data) => {

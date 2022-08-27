@@ -5,6 +5,7 @@ export const Member = (props) => {
   return (
     <>
     <div>유저 목록</div>
+    <p>{props.member}</p>
     </>
   );
 };

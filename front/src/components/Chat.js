@@ -42,12 +42,12 @@ function Chat({ socket, username, room }) {
     });
   }, [socket]);
 
-  useEffect(()=>{
-    socket.on('member', (data)=>{
-      console.log(data)
-      setMember((member)=>[...member, data]);
-    })
-  })
+  // useEffect(()=>{
+  //   socket.on('member', (data)=>{
+  //     setMember((member)=>[...member, data]);
+  //     socket.emit('setMember',member)
+  //   })
+  // })
 
   useEffect(() => {
     messageBottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -55,10 +55,10 @@ function Chat({ socket, username, room }) {
 
   return (
     <RoomContainer>
+      {/* <Member member={member} /> */}
       <RoomHeader>
         <RoomTitle>{room}번 채팅방</RoomTitle>
       </RoomHeader>
-      {/* <Member member={member} /> */}
       <RoomBody>
         {/* <ScrollToBottom className='MessageBox'> */}
         <MessageBox>
