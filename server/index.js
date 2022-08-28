@@ -18,17 +18,21 @@ const io = new Server(server, {
 
 io.on("connection", (socket) => {
 
-  console.log(`${socket.id} 유저가 접속했습니다`);
+  let username = '';
 
   socket.on("join_room", (data) => {
-    let member = [];
-    let nickname = data.username;
     socket.join(data.room);
     console.log(`${data.username}유저가 ${data.room}번 방에 입장했습니다`);
-    socket.to(data.room).emit('member', member);
+    let noti = {
+      message:`${data.username} 유저가 방에 입장했습니다`,
+      author:'알림'
+    }
+    socket.to(data.room).emit('receive_message', noti);
+    return username = data.username;
   });
 
   socket.on("send_message", (data) => {
+    console.log(data)
     socket.to(data.room).emit("receive_message", data);
     console.log('데이터 전송')
   });
