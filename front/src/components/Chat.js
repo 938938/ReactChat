@@ -83,7 +83,7 @@ function Chat({ socket, username, room }) {
             event.key === "Enter" && sendMessage();
           }}
         />
-        <ChatButton onClick={sendMessage}>&#9657;</ChatButton>
+        <ChatButton onClick={sendMessage}>▹</ChatButton>
       </ChatInputBox>
     </RoomContainer>
   );
