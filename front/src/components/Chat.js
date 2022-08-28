@@ -8,8 +8,8 @@ import { Member } from './Member';
 function Chat({ socket, username, room }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  const [member, setMember] = useState([]);
-  const [login, setLogin] = useState(false);
+  // const [member, setMember] = useState([]);
+  // const [login, setLogin] = useState(false);
 
   const messageBottomRef = useRef(null);
 
@@ -83,7 +83,7 @@ function Chat({ socket, username, room }) {
             event.key === "Enter" && sendMessage();
           }}
         />
-        <ChatButton onClick={sendMessage}>&#9658;</ChatButton>
+        <ChatButton onClick={sendMessage}>&#9657;</ChatButton>
       </ChatInputBox>
     </RoomContainer>
   );
