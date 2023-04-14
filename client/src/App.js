@@ -9,11 +9,15 @@ function App() {
   const [username, setUsername] = useState('');
   const [room, setRoom] = useState('');
   const [showChat, setShowChat] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
-  const joinRoom = () => {
+  const joinRoom = (e) => {
+    e.preventDefault();
     if (username !== '' && room !== '') {
       socket.emit('join_room', { room, username });
       setShowChat(true);
+    } else {
+      setErrorMsg('사용자 이름과 입장할 방을 입력해주세요.');
     }
   };
 
@@ -26,6 +30,7 @@ function App() {
             type='text'
             placeholder='사용할 이름을 입력해주세요'
             onChange={(e) => {
+              setErrorMsg('');
               setUsername(e.target.value);
             }}
           />
@@ -33,9 +38,11 @@ function App() {
             type='text'
             placeholder='입장할 방을 입력해주세요'
             onChange={(e) => {
+              setErrorMsg('');
               setRoom(e.target.value);
             }}
           />
+          <ErrorMessage>{errorMsg}</ErrorMessage>
           <ChatButton onClick={joinRoom}>입장</ChatButton>
         </ChatContainer>
       ) : (
@@ -63,7 +70,7 @@ const ChatContainer = styled.form`
   border: 1px solid steelblue;
   border-radius: 6px;
   padding: 10px;
-  width: 250px;
+  width: 300px;
 `;
 const ChatTitle = styled.h3`
   font-size: 2rem;
@@ -79,6 +86,12 @@ const ChatInput = styled.input`
   font-size: 16px;
 `;
 
+const ErrorMessage = styled.p`
+  color: red;
+  height: 10px;
+  font-size: 0.8rem;
+`;
+
 const ChatButton = styled.button`
   width: 200px;
   height: 50px;
@@ -90,7 +103,12 @@ const ChatButton = styled.button`
   background: steelblue;
   color: #fff;
   cursor: pointer;
+  transition: all 0.5s;
   &:hover {
     background: rgb(35, 65, 89);
+    transition: all 0.5s;
+  }
+  &:active {
+    font-size: 0.8rem;
   }
 `;
