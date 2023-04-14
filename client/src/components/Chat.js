@@ -1,86 +1,68 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 // import ScrollToBottom from "react-scroll-to-bottom";
-import { Message } from "./Message";
-import styled from "styled-components";
+import { Message } from './Message';
+import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import { Member } from './Member';
 
 function Chat({ socket, username, room }) {
-  const [currentMessage, setCurrentMessage] = useState("");
+  const inputRef = useRef();
   const [messageList, setMessageList] = useState([]);
-  // const [member, setMember] = useState([]);
-  // const [login, setLogin] = useState(false);
 
   const messageBottomRef = useRef(null);
 
   const sendMessage = async () => {
-    if (currentMessage !== "") {
+    const currentMsg = inputRef.current.value;
+    if (currentMsg !== '') {
       const messageData = {
         room: room,
         author: username,
-        message: currentMessage,
+        message: currentMsg,
         time:
           new Date(Date.now()).getHours() +
-          ":" +
+          ':' +
           new Date(Date.now()).getMinutes(),
       };
-      await socket.emit("send_message", messageData);
+      await socket.emit('send_message', messageData);
       setMessageList((list) => [...list, messageData]);
-      setCurrentMessage("");
+      inputRef.current.value = '';
     }
   };
-
-  console.log(socket);
-
-  // useEffect(()=>{
-  //   socket.close();
-  // },[])
-
   useEffect(() => {
-    socket.on("receive_message", (data) => {
+    socket.on('receive_message', (data) => {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
 
-  // useEffect(()=>{
-  //   socket.on('member', (data)=>{
-  //     setMember((member)=>[...member, data]);
-  //     socket.emit('setMember',member)
-  //   })
-  // })
-
   useEffect(() => {
-    messageBottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    messageBottomRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messageList]);
 
   return (
     <RoomContainer>
-      {/* <Member member={member} /> */}
       <RoomHeader>
         <RoomTitle>{room}번 채팅방</RoomTitle>
       </RoomHeader>
       <RoomBody>
-        {/* <ScrollToBottom className='MessageBox'> */}
         <MessageBox>
           {messageList.map((messageContent) => {
             return (
-              <Message messageContent={messageContent} username={username} key={uuidv4()} />
+              <Message
+                messageContent={messageContent}
+                username={username}
+                key={uuidv4()}
+              />
             );
           })}
           <div ref={messageBottomRef} />
         </MessageBox>
-        {/* </ScrollToBottom> */}
       </RoomBody>
       <ChatInputBox>
         <ChatInput
+          ref={inputRef}
           type='text'
-          value={currentMessage}
           placeholder='메세지를 입력해주세요'
-          onChange={(event) => {
-            setCurrentMessage(event.target.value);
-          }}
           onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
+            event.key === 'Enter' && sendMessage();
           }}
         />
         <ChatButton onClick={sendMessage}>▹</ChatButton>
@@ -93,9 +75,10 @@ export default Chat;
 
 const RoomContainer = styled.div`
   width: 50%;
-  @media screen and (max-width: 500px) {
-        width:90%;
-    }
+  max-width: 600px;
+  @media screen and (max-width: 550px) {
+    width: 90%;
+  }
   height: 440px;
 `;
 
@@ -130,7 +113,7 @@ const MessageBox = styled.div`
   &:-webkit-scrollbar {
     display: none;
   }
-  padding-top:5px;
+  padding-top: 5px;
 `;
 
 const ChatInputBox = styled.div`
@@ -162,8 +145,15 @@ const ChatButton = styled.button`
   background: transparent;
   outline: none;
   font-size: 25px;
+  transition: all 0.5s;
   color: lightgray;
   &:hover {
     background: steelblue;
+    transition: all 0.5s;
+  }
+  &:active {
+    background: darkblue;
+    /* transition: all 0.5s; */
+    font-size: 0.5rem;
   }
 `;

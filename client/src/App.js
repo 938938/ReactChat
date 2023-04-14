@@ -1,18 +1,18 @@
-import io from "socket.io-client";
-import { useState } from "react";
-import Chat from "./components/Chat";
-import styled from "styled-components";
+import io from 'socket.io-client';
+import { useState } from 'react';
+import Chat from './components/Chat';
+import styled from 'styled-components';
 
-const socket = io.connect("http://localhost:4000");
+const socket = io.connect('http://localhost:4000');
 
 function App() {
-  const [username, setUsername] = useState("");
-  const [room, setRoom] = useState("");
+  const [username, setUsername] = useState('');
+  const [room, setRoom] = useState('');
   const [showChat, setShowChat] = useState(false);
 
   const joinRoom = () => {
-    if (username !== "" && room !== "") {
-      socket.emit("join_room", {room, username});
+    if (username !== '' && room !== '') {
+      socket.emit('join_room', { room, username });
       setShowChat(true);
     }
   };
@@ -21,17 +21,17 @@ function App() {
     <ChatApp>
       {!showChat ? (
         <ChatContainer>
-          <ChatTitle>Chat !</ChatTitle>
+          <ChatTitle>Chat With !</ChatTitle>
           <ChatInput
-            type="text"
-            placeholder="사용할 이름을 입력해주세요"
+            type='text'
+            placeholder='사용할 이름을 입력해주세요'
             onChange={(e) => {
               setUsername(e.target.value);
             }}
           />
           <ChatInput
-            type="text"
-            placeholder="입장할 방을 입력해주세요"
+            type='text'
+            placeholder='입장할 방을 입력해주세요'
             onChange={(e) => {
               setRoom(e.target.value);
             }}
@@ -54,30 +54,30 @@ const ChatApp = styled.div`
   color: #212121;
   display: grid;
   place-items: center;
-`
+`;
 
-const ChatContainer = styled.div`
+const ChatContainer = styled.form`
   display: flex;
   flex-direction: column;
   text-align: center;
-  border:1px solid steelblue;
-  border-radius:6px;
-  padding:10px;
-  width:250px;
-`
+  border: 1px solid steelblue;
+  border-radius: 6px;
+  padding: 10px;
+  width: 250px;
+`;
 const ChatTitle = styled.h3`
   font-size: 2rem;
   margin-bottom: 1rem;
-  color:steelblue;
-`
+  color: steelblue;
+`;
 const ChatInput = styled.input`
   height: 35px;
   margin: 7px;
   border: 2px solid steelblue;
   border-radius: 5px;
-  padding: 5px;
+  padding: 5px 10px;
   font-size: 16px;
-`
+`;
 
 const ChatButton = styled.button`
   width: 200px;
@@ -90,7 +90,7 @@ const ChatButton = styled.button`
   background: steelblue;
   color: #fff;
   cursor: pointer;
-  &:hover{  
+  &:hover {
     background: rgb(35, 65, 89);
   }
-`
+`;

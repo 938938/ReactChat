@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 export const Message = (props) => {
   const messageContent = props.messageContent;
   const username = props.username;
-  const [who, setWho] = useState("me");
+  const [who, setWho] = useState('me');
   useEffect(() => {
-    username === messageContent.author ? setWho("me") : setWho("other");
-  },[props]);
+    username === messageContent.author ? setWho('me') : setWho('other');
+  }, [props]);
 
   return (
     <MessageContainer who={who}>
@@ -26,7 +26,9 @@ export const Message = (props) => {
 
 const MessageContainer = styled.div`
   display: flex;
-  justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
+  justify-content: ${({ who }) => (who === 'me' ? 'flex-end' : 'flex-start')};
+  padding: 0 10px;
+  box-sizing: border-box;
 `;
 
 const MessageBody = styled.div`
@@ -39,26 +41,26 @@ const MessageBody = styled.div`
   margin: 0 3px;
   padding: 2px 5px;
   overflow-wrap: break-word;
-  word-break:break-all;
-  justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
-  background-color: ${({ who }) => (who === "me" ? "#598da7" : "#2d617b")};
+  word-break: break-all;
+  justify-content: ${({ who }) => (who === 'me' ? 'flex-end' : 'flex-start')};
+  background-color: ${({ who }) => (who === 'me' ? '#598da7' : '#2d617b')};
 `;
 
 const MessageText = styled.p`
-  margin:5px;
-`
+  margin: 5px;
+`;
 
 const MessageSub = styled.div`
   display: flex;
   font-size: 12px;
-  justify-content: ${({ who }) => (who === "me" ? "flex-end" : "flex-start")};
-  margin-right: ${({ who }) => (who === "me" ? "10px" : "")};
-  margin-left: ${({ who }) => (who === "me" ? "" : "10px")};
+  justify-content: ${({ who }) => (who === 'me' ? 'flex-end' : 'flex-start')};
+  margin-right: ${({ who }) => (who === 'me' ? '10px' : '')};
+  margin-left: ${({ who }) => (who === 'me' ? '' : '10px')};
 `;
 
 const Time = styled.p`
   margin-top: 5px;
-  margin-right:5px;
+  margin-right: 5px;
 `;
 
 const Author = styled.p`
