@@ -6,6 +6,7 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
 <br>
 
 ---
+
 <br>
 
 입장시 화면(왼쪽)과 채팅 화면(오른쪽)
@@ -14,13 +15,15 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
 <br>
 
 ---
+
 <br>
 
 ## 사용 방법
-1. front와 server 폴더를 모두 받아주세요.
+
+1. client와 server 폴더를 모두 받아주세요.(git을 클론해주세요.)
 2. server 위치에서 npm i 혹은 npm install 을 통해 node modules를 다운받은 후 npm start를 실행해주세요.
-3. front 위치에서 npm i 혹은 npm install 을 통해 node modules를 다운받은 후 npm start를 실행해주세요.
-4. 대화를 나눠주세요!
+3. client 위치에서 npm i 혹은 npm install 을 통해 node modules를 다운받은 후 npm start를 실행해주세요.
+4. 같은 방에 입장하면 실시간 채팅이 가능합니다! 대화를 나눠주세요!
 
 ## 업데이트 기록
 
@@ -36,9 +39,6 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
   (index.js에 있는 React.strictmode가 구성 요소를 두 번 매핑함으로 인해 생겨난 문제, 해당 태그를 삭제.)
 - ver1.0.4 <br>
   채팅방에 새로운 유저의 접속 알림(알림:메세지 형식)
-
-## 앞으로 업데이트 할 내용(예정, 순서 무관)
-
-- 레이아웃 업데이트 : 진행 중
-- 채팅방에 접속한 유저 목록 보기 기능 : 진행 중
-- DB 연결
+- ver1.0.5 <br>
+  메세지를 적을 때 깜박거리는 현상 개선<br>
+  입장 에러 메세지 추가
