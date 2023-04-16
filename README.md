@@ -14,6 +14,8 @@ ReactJS, 그리고 Node.js를 서버로 socket.io를 사용해 만들어 본 채
 
 <br>
 
+![사용 영상](https://user-images.githubusercontent.com/92746200/232316904-2a7da13c-f532-4765-954e-5406860be132.gif)
+
 ---
 
 <br>
